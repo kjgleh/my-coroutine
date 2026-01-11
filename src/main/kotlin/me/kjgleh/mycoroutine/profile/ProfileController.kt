@@ -10,13 +10,14 @@ class ProfileController(
 ) {
 
     @GetMapping("/profiles/{memberId}")
-    fun getProfile(@PathVariable memberId: Long): ProfileResponse {
+    suspend fun getProfile(@PathVariable memberId: Long): ProfileResponse {
         val result = profileService.load(memberId)
 
         return ProfileResponse(
             memberId = memberId,
             member = result.member,
             orders = result.orders,
+            coupons = result.coupons,
         )
     }
 
